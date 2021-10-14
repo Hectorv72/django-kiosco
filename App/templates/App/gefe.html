@@ -1,0 +1,18 @@
+{% extends 'App/template.html' %}
+{% load static %}
+
+{% block contenido %}
+
+
+<a href="{% url 'ventas' %}"><button class="btn btn-outline-primary btn-lg">Ventas</button></a>
+<a href="{% url 'empleados' %}"><button class="btn btn-outline-primary btn-lg">Empleados</button></a>
+<a href="{% url 'agregar_empleado' %}"><button class="btn btn-outline-primary btn-lg">Agregar empleado</button></a>
+
+<div class="border border-primary container"><br>
+{% block gefe %}
+    
+
+{% endblock %}
+</div>
+
+{% endblock %}

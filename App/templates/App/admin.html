@@ -1,0 +1,17 @@
+{% extends 'App/template.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<a href="{% url 'articulos_admin' %}"><button class="btn btn-outline-primary btn-lg">Articulos</button></a>
+<a href="{% url 'agregar' %}"><button class="btn btn-outline-primary btn-lg">Agregar Articulo</button></a>
+<a href="{% url 'rubros' %}"><button class="btn btn-outline-primary btn-lg">Rubros</button></a>
+
+<div class="border border-primary container"><br>
+{% block admin %}
+    
+
+{% endblock %}
+</div>
+
+{% endblock %}

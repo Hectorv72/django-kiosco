@@ -1,0 +1,95 @@
+{% extends 'App/gefe.html' %}
+{% load static %}
+
+{% block gefe %}
+
+<a href="{% url 'empleados' %}"><button class="btn btn-outline-info">Volver</button></a><br><br>
+
+
+<label><h4>{{ Estado }}</h4></label><br>
+
+<form action="{% url 'modificar_empleado' %}" method="POST">
+    {% csrf_token %}
+
+    <input type="hidden" value="{{ Persona.id }}" name="id">
+
+    <label>Nombre:</label>
+    <input type="text" value="{{ Persona.datos_personales.nombre }}" name="Nombre" required>
+
+    <label>Apellido:</label>
+    <input type="text" value="{{ Persona.datos_personales.apellido }}" name="Apellido" required><br><br>
+
+    <label>Fecha de nacimiento:</label>
+    <input type="date" name="Fecha_Nac" value="{{ Persona.datos_personales.fecha_nac|date:'Y-m-d' }}" required><br><br>
+
+    <label>Fecha de ingreso(Antigüedad):</label>
+    <input type="date" name="Fecha_Ing" value="{{ Persona.legajo_empleado.antiguedad|date:'Y-m-d' }}" required><br><br>
+
+
+
+
+    <label>Domicilio:</label>
+
+    <input type="radio" id="list" name="dom" value="list" checked>
+
+    <select id="list_domicilio" name="Domicilio" required>
+        <option value>------</option>
+        {% for i in Domicilios %}
+            {% if i.localizacion == Persona.datos_personales.domicilio.localizacion %}
+                <option value="{{ i.id }}" selected >{{ i.localizacion }}</option>
+            {% else %}
+                <option value="{{ i.id }}" >{{ i.localizacion }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+
+    <input type="radio" id="text" name="dom" value="text">
+    <input type="text" id="text_domicilio" placeholder="Nuevo domicilio" disabled name="agregar_domicilio" required><br><br>
+
+
+
+
+
+
+    <label>Numero de Telefono(Opcional):</label>
+    <input type="number" value="{{ Persona.datos_personales.contacto.telefono }}" name="Telefono"><br><br>
+
+    <label>Correo electronico(Opcional):</label>
+    <input type="text" value="{{ Persona.datos_personales.contacto.correo }}" name="Correo"><br><br>
+
+    <label>Tipo de persona:</label>
+    <select name="Tipo_Persona" required>
+        <option value>------</option>
+        {% for i in TiposPersonas %}
+            {% if i.descripcion == Persona.tipo_persona.descripcion %}
+                <option selected value="{{ i.id }}">{{ i.descripcion }}</option>
+            {% else %}
+                <option value="{{ i.id }}">{{ i.descripcion }}</option>
+            {% endif %}
+        {% endfor %}
+    </select><br><br>
+
+    <label>Salario:$</label>
+    <input type="number" value="{{ Persona.legajo_empleado.salario }}" name="Salario" required><br><br>
+    
+    <button class="btn btn-outline-info">Guardar</button>
+</form><br><br>
+
+
+
+<script>
+    var enlista = false
+
+    document.addEventListener("click", function(){
+
+        if ($("#list").is(":checked") ){
+            $("#text_domicilio").prop('disabled', true);
+            $("#list_domicilio").prop('disabled', false);
+        }else{
+            $("#text_domicilio").prop('disabled', false);
+            $("#list_domicilio").prop('disabled', true);
+        }
+    });
+</script>
+
+{% endblock %}

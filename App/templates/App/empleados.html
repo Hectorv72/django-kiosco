@@ -1,0 +1,53 @@
+{% extends 'App/gefe.html' %}
+{% load static %}
+
+{% block gefe %}
+
+    <label><h4>{{ Estado }}</h4></label>
+
+<table class="table table-bordered" >
+    <tr>
+        <td align="center"><b>Nombre</b></td>
+        <td align="center"><b>Tipo</b></td>
+        <td align="center"><b>Domicilio</b></td>
+        <td align="center"><b>Antiguedad</b></td>
+        <td align="center"><b>Salario</b></td>
+        <td align="center"><b>Fecha Nacimiento</b></td>
+        <td align="center"><b>Contacto</b></td>
+        <td align="center" colspan="2"><b>Acciones</b></td>
+    </tr>
+    
+    {% for i in Empleados %}
+        <tr>
+            <td align="center"> {{ i.datos_personales.nombre }} {{ i.datos_personales.apellido }} </td>
+            <td align="center"> {{ i.tipo_persona.descripcion }} </td>
+            <td align="center"> {{ i.datos_personales.domicilio.localizacion }} </td>
+            <td align="center"> {{ i.legajo_empleado.antiguedad }} </td>
+            <td align="center"> ${{ i.legajo_empleado.salario }} </td>
+            <td align="center"> {{ i.datos_personales.fecha_nac }} </td>
+            <td> 
+                <label>Telefono: </label>{{ i.datos_personales.contacto.telefono }}<br>
+                <label>Correo: </label>{{ i.datos_personales.contacto.correo }} 
+            </td>
+
+            <td> <a href="{% url 'modificar_empleado' %}?idpersona={{ i.id }}"> <button class="btn btn-outline-primary btn-block">Modificar</button></a></td>
+            <td><button onclick="Preguntar( '{{ i.id }}' )" class="btn btn-outline-danger btn-block">Eliminar</button></td>
+
+        </tr>
+    {% endfor %}
+
+</table>
+
+
+<script>
+    function Preguntar(variable){
+    variable = parseInt(variable)
+    confirmacion = window.confirm("Esta seguro de eliminar al empleado?")
+        if(confirmacion == true){
+            window.location.href = "{% url 'empleados' %}?id=" + variable;
+        }
+    }
+</script>
+
+
+{% endblock %}

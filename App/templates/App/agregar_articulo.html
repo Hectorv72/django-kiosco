@@ -1,0 +1,62 @@
+{% extends 'App/admin.html' %}
+{% load static %}
+
+
+
+{% block admin %}
+    <div class="container">
+
+    <label><h4>{{ Estado }}</h4></label>
+
+    <form action="{% url 'agregar'%}" method="POST">
+        {% csrf_token %}
+
+        <p>
+            <label>Articulo:</label>
+            {{ Formulario.nombre_art }}
+        </p>
+        
+        <p>
+            <label>Precio:$</label>
+            {{ Formulario.precio }}
+        </p>
+        
+        <p>
+            <label>Rubro:</label>
+
+            <input type="radio" id="list" name="rub" value="list" checked>
+            {{ Formulario.rubro }}
+            <input type="radio" id="text" name="rub" value="text">
+            <input type="text" id="textrub" placeholder="Nuevo rubro" disabled name="agregar_rubro">
+        </p>
+        
+        <p>
+            <label>Stock:</label>
+            {{ Formulario.stock }}
+        </p>
+        
+
+        <button class="btn btn-outline-info">Agregar</button>
+    </form><br>
+
+    </div>
+
+    <script>
+        var enlista = false
+
+        document.addEventListener("click", function(){
+
+            if ($("#list").is(":checked") ){
+                $("#textrub").prop('disabled', true);
+                $("#id_rubro").prop('disabled', false);
+            }else{
+                $("#textrub").prop('disabled', false);
+                $("#id_rubro").prop('disabled', true);
+            }
+        });
+
+
+    </script>
+
+
+{% endblock %}

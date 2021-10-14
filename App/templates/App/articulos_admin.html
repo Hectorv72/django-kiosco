@@ -1,0 +1,40 @@
+{% extends 'App/admin.html' %}
+{% load static %}
+
+{% block admin %}
+
+<table class="table table-bordered" >
+    <tr>
+        <td align="center"><b>Articulo</b></td>
+        <td align="center"><b>Precio</b></td>
+        <td align="center"><b>Rubro</b></td>
+        <td align="center"><b>Stock</b></td>
+        <td align="center" colspan=2><b>Acciones<b></td>
+    </tr>
+    
+    {% for i in Articulos %}
+        <tr>
+            <td align="center"> {{ i.nombre_art }} </td>
+            <td align="center"> {{ i.precio }} </td>
+            <td align="center"> {{ i.rubro.descripcion }} </td>
+            <td align="center"> {{ i.stock }} </td>
+            <td> <a href="{% url 'modificar' art=i.id %}"><button class="btn btn-outline-primary btn-block">Modificar</button></a> </td>
+            <td>  <button onclick="Preguntar( '{{ i.id }}' )" class="btn btn-outline-danger btn-block" ><i class="icon-min basura"></i>Eliminar</button> </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+<script>
+    function Preguntar(variable){
+        variable = parseInt(variable)
+        confirmacion = window.confirm("Esta seguro de eliminar este articulo?")
+        if(confirmacion == true){
+            window.location.href = "{% url 'eliminar' %}?id=" + variable;
+        }
+    }
+
+    ///window.location.href
+</script>
+
+{% endblock %}

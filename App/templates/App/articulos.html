@@ -1,0 +1,30 @@
+{% extends 'App/template.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<table class="table table-bordered">
+    <tr>
+        <td align="center"><b>Articulo</b></td>
+        <td align="center"><b>Precio</b></td>
+        <td align="center"><b>Rubro</b></td>
+        <td align="center"><b>Stock</b></td>
+        <td></td>
+    </tr>
+    
+    {% for i in Articulos %}
+        <tr>
+            <td align="center"> {{ i.nombre_art }} </td>
+            <td align="center"> {{ i.precio }} </td>
+            <td align="center"> {{ i.rubro.descripcion }} </td>
+            <td align="center"> {{ i.stock }} </td>
+            {% if i.stock > 0 %}
+                <td>
+                    <a href="{% url 'vender' %}?id={{ i.id }}"><button class="btn btn-outline-success btn-block"><i class="icon-min peso"></i>Vender</button></a>
+                </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

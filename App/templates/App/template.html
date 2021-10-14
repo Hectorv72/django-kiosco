@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery/dist/jquery.min.js' %}"></script>
+</head>
+<style>
+    html *{
+        font-family: Comic-Sans;
+    }
+
+    html {
+        background-color: #007bff;
+    }
+
+    body {
+        background-color: #007bff;
+    }
+
+    .centro{
+        width: 90%;
+        margin-left: 8%;
+        margin-top: 5%;
+        border-radius: 20px;
+    }
+    .centroplus{
+        padding: 50px;
+    }
+
+    .icon{
+        background-size: cover;
+        display:inline-block;
+        height: 32px;
+        width: 32px;
+    }
+
+    .icon-min{
+        background-size: cover;
+        display:inline-block;
+        height: 13px;
+        width: 13px;
+    }
+
+    .jefe{
+        background-image : url("{% static 'svg/Jefe.svg' %}"); 
+    }
+
+    .admin{
+        background-image : url("{% static 'svg/Admin.svg' %}");
+    }
+
+    .empleado{
+        background-image : url("{% static 'svg/Empleado.svg' %}");
+    }
+
+    .peso{
+        background-image : url("{% static 'svg/peso.svg' %}");
+    }
+
+    .basura{
+        background-image : url("{% static 'svg/basura.svg' %}");
+    }
+</style>
+<body>
+        <div class="centro container bg-white">
+            <div class="container centroplus">
+            <a href="{% url 'gefe' %}"><button class="btn btn-outline-success btn-lg"><i class="icon jefe"></i> Modo Jefe</button></a>
+            <a href="{% url 'admin' %}"><button class="btn btn-outline-success btn-lg"><i class="icon admin"></i>Modo Administrador</button></a>
+            <a href="{% url 'articulos' %}"><button class="btn btn-outline-success btn-lg"><i class="icon empleado"></i>Modo Empleado</button></a><br><br>
+
+            
+            {% block contenido %}
+            {% endblock %}
+            </div>
+        </div>
+
+</body>
+</html>

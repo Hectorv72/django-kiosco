@@ -1,0 +1,29 @@
+{% extends 'App/gefe.html' %}
+{% load static %}
+
+{% block gefe %}
+
+
+<table class="table table-bordered">
+    <tr>
+        <td align="center"><b>Fecha</b></td>
+        <td align="center"><b>Vendedor</b></td>
+        <td align="center"><b>Articulo</b></td>
+        <td align="center"><b>Rubro</b></td>
+        <td align="center"><b>Cantidad</b></td>
+        <td align="center"><b>Total</b></td>
+    </tr>
+    
+    {% for i in Ventas %}
+        <tr>
+            <td align="center"> {{ i.det_venta.fecha_venta }} </td>
+            <td align="center"> {{ i.persona.datos_personales.nombre }} {{ i.persona.datos_personales.apellido }} </td>
+            <td align="center"> {{ i.det_venta.articulo.nombre_art }} </td>
+            <td align="center"> {{ i.det_venta.articulo.rubro.descripcion }} </td>
+            <td align="center"> {{ i.det_venta.cant_venta }} </td>
+            <td align="center"> ${{ i.det_venta.precio }} </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
